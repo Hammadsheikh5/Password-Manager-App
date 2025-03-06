@@ -1,4 +1,3 @@
-import pyperclip  # Enables copying text (passwords) to the clipboard
 import streamlit as st  # Streamlit for creating the web-based UI
 import re  # Regular expressions for pattern matching (useful for password validation)
 import random  # Random module for generating passwords with random characters
@@ -82,8 +81,7 @@ def main():
     # Initialize session state
     if "password_history" not in st.session_state:
         st.session_state.password_history = {"strength": [], "random": [], "ai": []}
-    if "generated_password" not in st.session_state:
-        st.session_state.generated_password = {"random" : "", "ai": ""}
+
     # Sidebar navigation
     tab = st.sidebar.radio("Navigation", ["Password Strength Meter", "Generate Random Password", "Generate AI Password" , "Tips to Create Strong Passwords"])
 
@@ -125,11 +123,9 @@ def main():
         if st.session_state.password_history["strength"]:
             st.subheader("📜 Checked Password History")
             st.write("Here are your recently checked passwords:")
-            selected_password = st.radio("Select a password from history:", options=list(reversed(st.session_state.password_history["strength"][-10:])), index=0)
-            # Copy button for selected history password (with unique key)
-            if st.button("📋 Copy Selected Password", key="copy_selected1"):
-                pyperclip.copy(selected_password)
-                st.success("✅ Password copied to clipboard!")
+            for i, password in enumerate(reversed(st.session_state.password_history["strength"][-10:]), 1):
+                st.code(password)
+
 
 
 # Generate Random Password Tab
@@ -139,25 +135,18 @@ def main():
         length = st.number_input("Enter password length to generate:", min_value=8, max_value=16, step=1)
         # Generate Random Password 
         if st.button("Generate Password"):
-            st.session_state.generated_password["random"] = generate_password(length)
-            st.session_state.password_history["random"].append(st.session_state.generated_password["random"])
-        # Show Random generated password (Persists after rerun)
-        if st.session_state.generated_password["random"]:
+            random_password = generate_password(length)
+            st.session_state.password_history["random"].append(random_password)
             st.write("✅ Use this password for better security. Save it somewhere safe!")
-            st.success(f"Your random password is: **{st.session_state.generated_password["random"]}**")
-            # Copy button for generated password (with unique key)
-            if st.button("📋 Copy Generated Password", key="copy_generated1"):
-                pyperclip.copy(st.session_state.generated_password["random"])
-                st.success("✅ Password copied to clipboard!")
+            st.success(f"Your random password is: **{random_password}")
+            st.code(random_password, language="plaintext")
         st.divider()
          # Show password history
         if st.session_state.password_history["random"]:
             st.subheader("📜 Random Password History")
-            selected_password = st.radio("Select a password from history:", options=list(reversed(st.session_state.password_history["random"][-10:])), index=0)
-            # Copy button for selected history password (with unique key)
-            if st.button("📋 Copy Selected Password", key="copy_selected1"):
-                pyperclip.copy(selected_password)
-                st.success("✅ Password copied to clipboard!")
+            for i, password in enumerate(reversed(st.session_state.password_history["random"][-10:]), 1):
+                st.code(password)
+
 
 
 # Generate AI Password Tab
@@ -166,25 +155,19 @@ def main():
         st.markdown("#### Let the AI create a strong password for you!")
         # Generate AI Password
         if st.button("Generate AI Password"):
-            st.session_state.generated_password["ai"] = generate_ai_password()
-            st.session_state.password_history["ai"].append(st.session_state.generated_password["ai"])
-        # Show AI-generated password (Persists after rerun)    
-        if st.session_state.generated_password["ai"]:
+            ai_password = generate_ai_password()
+            st.session_state.password_history["ai"].append(ai_password)
+            st.success(f"Your AI-generated password is: **{ai_password}**")
+            st.code(ai_password, language="plaintext")
             st.write("✅ Use this password for better security. Save it somewhere safe!")
-            st.success(f"Your AI-generated password is: **{st.session_state.generated_password["ai"]}**")
-            # Copy button for generated password (with unique key)
-            if st.button("📋 Copy Generated Password", key="copy_generated"):
-                pyperclip.copy(st.session_state.generated_password["ai"])
-                st.success("✅ Password copied to clipboard!")
+
         st.divider()
         # Show password history
         if st.session_state.password_history["ai"]:
             st.subheader("📜 AI-Generated Password History")
-            selected_password = st.radio("Select a password from history:", options=list(reversed(st.session_state.password_history["ai"][-10:])), index=0)
-            # Copy button for selected history password (with unique key)
-            if st.button("📋 Copy Selected Password", key="copy_selected"):
-                pyperclip.copy(selected_password)
-                st.success("✅ Password copied to clipboard!")
+            for i, password in enumerate(reversed(st.session_state.password_history["ai"][-10:]), 1):
+                st.code(password)
+
     
 
 # Tips to Create Strong Passwords Tab

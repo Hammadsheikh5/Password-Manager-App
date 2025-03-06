@@ -2,7 +2,7 @@
 **Muhammad Hammad**  
 **GIAIC Student ID Number:** 413850  
 **Slot:** Section A (Tuesday Evening)  
-**Growth Mindset Challenge Web App Deployed URL:** [Universal Converter App](https://universalconverterapp.streamlit.app/)
+**Web App Deployed URL:** [Password Manager App](https://password-manager-app-hammad.streamlit.app/)
 
 # Password Manager
 
@@ -37,13 +37,13 @@ A **secure password manager** built using **Streamlit** that allows users to:
 
 1. **Clone the Repository**
 ```bash
- git clone https://github.com/your-username/password-manager.git
- cd password-manager
+ git clone https://github.com/Hammadsheikh5/Password-Manager-App.git
+ cd Password-Manager-App
 ```
 
 2. **Install Required Dependencies**
 ```bash
- pip install streamlit pyperclip
+ pip install streamlit 
 ```
 
 3. **Run the Application**
@@ -59,7 +59,6 @@ A **secure password manager** built using **Streamlit** that allows users to:
 ## Technologies Used
 - **Python**
 - **Streamlit** (For UI)
-- **Pyperclip** (For clipboard functionality)
 - **Regular Expressions** (For password validation)
 - **Random & String Modules** (For password generation)
 
