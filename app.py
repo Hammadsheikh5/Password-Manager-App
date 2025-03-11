@@ -188,3 +188,24 @@ def main():
 # Run the app
 if __name__ == "__main__":
     main()
+
+    """
+    🔹 Explanation
+       1. __name__ is a special built-in variable in Python that holds the name of the current module.
+       2. When a Python script is run directly, __name__ is set to "__main__", meaning it is the main program being executed.
+       3. If the script is imported as a module into another script, __name__ will not be "__main__" but rather the module name.
+    """
+    """
+    🔹 Example Usage
+        1️⃣ When Running Directly
+            If you run your Python file:
+
+                python my_script.py
+            __name__ will be "__main__", so main() will execute.
+
+        2️⃣ When Importing as a Module
+            If you import this script in another Python file:
+
+                import my_script
+            __name__ will be "my_script", not "__main__", so main() won’t execute automatically.
+    """
